@@ -1,7 +1,84 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@using SocialNetwork.Core.Application.ViewModels.Comments
+@using SocialNetwork.Core.Application.ViewModels.Publications
+@model List<PublicationViewModel>
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Social Network</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form method="post" asp-controller="Publication" asp-action="Create">
+                <div class="d-flex flex-column">
+                    <textarea id="publicationContext" name="Content" rows="4" cols="50"></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    @if (Model == null || Model.Count() == 0)
+    {
+        <div class="text-center mt-2">
+            <h4>No hay publicaciones</h4>
+        </div>
+    }
+    else
+    {
+        foreach (PublicationViewModel publication in Model)
+        {
+            <div class="row mt-3 mb-3">
+                <div class="col-6 offset-3">
+                    <div class="card shadow-sm">
+                        <div class="d-flex flex-row m-1 height-28">
+                            <div class="m-1">
+                                <img src="@publication.User.ProfilePhotoUrl" width="25" height="25">
+                            </div>
+                            <div class="m-1">
+                                <p><strong>@publication.User.FirstName @publication.User.LastName</strong></p>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <small class="left-40" style="font-size: 12px;">@publication.Created.ToString()</small>
+                        </div>
+                        <p class="m-2">@publication.Content</p>
+
+                        @if (publication.ImageUrl != null)
+                        {
+                            <img src="@publication.ImageUrl" style="width:100%; height:50px;" />
+                        }
+                        <hr>
+                        <div class="mb-3">
+                            <form method="post" asp-controller="Comment" asp-action="Create">
+                                <input type="text" name="Content" />
+                                <input type="hidden" name="PublicationId" value="@publication.Id" />
+                                <button type="submit" class="btn btn-primary">Comentar</button>
+                            </form>
+                        </div>
+                        <div>
+                            @if (publication.Comments != null || publication.Comments.Count() != 0)
+                            {
+                                foreach (CommentViewModel comment in publication.Comments)
+                                {
+                                    <div class="card w-75 m-auto">
+                                        <div class="d-flex flex-row m-1 height-28">
+                                            <div class="m-1">
+                                                <img src="@comment.User.ProfilePhotoUrl" width="25" height="25">
+                                            </div>
+                                            <div class="m-1">
+                                                <p><strong>@comment.User.FirstName @comment.User.LastName</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            <small class="left-40" style="font-size: 12px;">@comment.Created.ToString()</small>
+                                        </div>
+                                        <p class="m-2">@comment.Content</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>

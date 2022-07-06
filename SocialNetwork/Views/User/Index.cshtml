@@ -1,0 +1,35 @@
+﻿@using SocialNetwork.Core.Application.ViewModels.Users
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm top-60">
+                <div class="card-header bg-black text-white">
+                    <h4 class="text-center">Login</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="User" asp-action="Index">
+                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Nombre de usuario</label>
+                            <input asp-for="Username" class="form-control"/>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" class="form-control"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                        <a class="btn btn-secondary" asp-controller="User" asp-action="Register">Registrarse</a>
+                        <a class="btn btn-secondary" asp-controller="User" asp-action="ResetPassword">Reestablecer contraseña</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

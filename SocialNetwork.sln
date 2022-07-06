@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork", "SocialNetwork\SocialNetwork.csproj", "{58D19CAA-387D-41B2-A37C-AB6EE9CDBBE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.SocialNetwork", "SocialNetwork\WebApp.SocialNetwork.csproj", "{58D19CAA-387D-41B2-A37C-AB6EE9CDBBE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{235631E1-D065-4D4D-9CDF-D8B64692DE62}"
 EndProject
@@ -18,6 +18,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Infrastructure.Persistence", "SocialNetwork.Infrastructure.Persistence\SocialNetwork.Infrastructure.Persistence.csproj", "{72F69944-77D5-4D3F-A64A-695498DA1930}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{1506FC7D-408A-487D-9A42-6E9A055B90E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD04F801-5FFC-48F1-AC2C-959C6C5AEEDD}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Infrastructure.Shared", "SocialNetwork.Infrastructure.Shared\SocialNetwork.Infrastructure.Shared.csproj", "{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +48,10 @@ Global
 		{72F69944-77D5-4D3F-A64A-695498DA1930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F69944-77D5-4D3F-A64A-695498DA1930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F69944-77D5-4D3F-A64A-695498DA1930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +64,7 @@ Global
 		{DB71160C-694B-480F-A915-50A66F9E3209} = {235631E1-D065-4D4D-9CDF-D8B64692DE62}
 		{2653BCB5-15D2-4A45-8F2C-CB3962E441C6} = {235631E1-D065-4D4D-9CDF-D8B64692DE62}
 		{72F69944-77D5-4D3F-A64A-695498DA1930} = {5143BECB-26AC-49D4-9D1A-1FE75E80916E}
+		{0A2A824C-3234-4D63-84A7-E9DF9B1C3D4F} = {5143BECB-26AC-49D4-9D1A-1FE75E80916E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98695F31-430E-4AB2-BD72-AEE0BEFE7297}

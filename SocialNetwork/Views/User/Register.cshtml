@@ -1,0 +1,58 @@
+﻿@using SocialNetwork.Core.Application.ViewModels.Users
+@model SaveUserViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm top-20">
+                <div class="card-header bg-black text-white">
+                    <h4 class="text-center">Registrarse</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data" asp-controller="User" asp-action="Register">
+                        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label">Nombre</label>
+                            <input asp-for="FirstName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label">Apellido</label>
+                            <input asp-for="LastName" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label">Teléfono</label>
+                            <input asp-for="Phone" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="File" class="form-label">Foto de perfil</label>
+                            <input required asp-for="File" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">Correo</label>
+                            <input asp-for="Email" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Nombre de usuario</label>
+                            <input asp-for="Username" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Contraseña</label>
+                            <input asp-for="Password" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label">Confirmar contraseña</label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <a class="btn btn-secondary" asp-controller="User" asp-action="Index">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

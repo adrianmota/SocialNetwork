@@ -24,7 +24,8 @@
                         </div>
                         <div class="mb-3">
                             <label asp-for="Phone" class="form-label">Teléfono</label>
-                            <input asp-for="Phone" class="form-control" />
+                            <input type="tel" value="+1 " pattern="+1 ([0-9]{3}) [0-9]{3}-[0-9]{4}" required asp-for="Phone" class="form-control" />
+                            <p><small>Formato: +1 (809) 567-8910</small></p>
                         </div>
                         <div class="mb-3">
                             <label asp-for="File" class="form-label">Foto de perfil</label>

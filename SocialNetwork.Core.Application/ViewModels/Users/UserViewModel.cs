@@ -1,6 +1,7 @@
 ﻿using SocialNetwork.Core.Application.ViewModels.Comments;
 using SocialNetwork.Core.Application.ViewModels.Friends;
 using SocialNetwork.Core.Application.ViewModels.Publications;
+using SocialNetwork.Core.Application.ViewModels.UserFriends;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace SocialNetwork.Core.Application.ViewModels.Users
         public string Password { get; set; }
         public bool Active { get; set; }
 
-        public ICollection<PublicationViewModel> Publications { get; set; }
+        public List<PublicationViewModel> Publications { get; set; }
+        public List<UserFriendViewModel> UserFriends { get; set; }
     }
 }

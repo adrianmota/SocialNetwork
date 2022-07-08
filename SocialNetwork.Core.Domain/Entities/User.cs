@@ -14,8 +14,8 @@ namespace SocialNetwork.Core.Domain.Entities
         public string Password { get; set; }
         public bool Active { get; set; }
 
-        public IList<UserFriend> UserFriends { get; set; }
-        public ICollection<Publication> Publications { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public List<UserFriend> UserFriends { get; set; }
+        public List<Publication> Publications { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

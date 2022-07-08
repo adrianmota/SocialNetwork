@@ -7,6 +7,7 @@ using SocialNetwork.Infrastructure.Shared.Services;
 using SocialNetwork.Core.Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using WebApp.SocialNetwork.Middlewares;
+using SocialNetwork.Core.Application.ViewModels.Friends;
 
 namespace WebApp.SocialNetwork.Controllers
 {
@@ -76,6 +77,11 @@ namespace WebApp.SocialNetwork.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetUserPasswordViewModel resetPasswordViewModel)
         {
+            if (_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(resetPasswordViewModel);
@@ -143,6 +149,10 @@ namespace WebApp.SocialNetwork.Controllers
             newSaveViewModel.ProfilePhotoUrl = imageUrl;
             await _userService.Update(newSaveViewModel, id);
 
+            SaveFriendViewModel saveFriendViewModel = await _friendService.GetByIdSaveViewModel(id);
+            saveFriendViewModel.ProfilePhotoUrl = imageUrl;
+            await _friendService.Update(saveFriendViewModel, id);
+
             //Send email after the user has been created
             await _emailService.SendAsync(new EmailRequest
             {
@@ -164,7 +174,7 @@ namespace WebApp.SocialNetwork.Controllers
             }
 
             await _userService.Activate(id);
-            return RedirectToRoute(new { controller = "User", action = "Index" });
+            return View("UserAvailable");
         }
     }
 }

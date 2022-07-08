@@ -19,6 +19,14 @@ namespace SocialNetwork.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
+        public override async Task UpdateAsync(Publication publication, int id)
+        {
+            Publication oldPublication = await _dbContext.Set<Publication>().FindAsync(id);
+            publication.Created = oldPublication.Created;
+            publication.CreatedBy = oldPublication.CreatedBy;
+            await base.UpdateAsync(publication, id);
+        }
+
         public async Task<List<Publication>> GetAllWithIncludeAsync(List<string> properties)
         {
             var query = _dbContext.Set<Publication>().AsQueryable();

@@ -5,13 +5,43 @@
     ViewData["Title"] = "Home";
 }
 
+<!-- Modal to upload image -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Subir imagen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" enctype="multipart/form-data" asp-controller="Publication" asp-action="Create">
+                <div class="modal-body">
+                    <input type="file" required class="form-control" name="File" />
+                    <input type="hidden" name="Id" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Content -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-6 offset-3">
+            <button type="button" title="Publicar imagen" class="btn btn-light border-1 border-dark" data-bs-toggle="modal" data-bs-target="#modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image" viewBox="0 0 16 16">
+                    <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+                </svg>
+            </button>
             <form method="post" asp-controller="Publication" asp-action="Create">
+                @Html.ValidationSummary(false, "", new {@class = "text-danger"})
                 <div class="d-flex flex-column">
-                    <textarea id="publicationContext" name="Content" rows="4" cols="50"></textarea>
-                    <button type="submit" class="btn btn-primary mt-2">Publicar</button>
+                    <textarea id="publicationContext" name="Content" placeholder="¿Qué piensas?" class="p-2 form-control" rows="3" cols="50"></textarea>
+                    <button id="btn-post" type="submit" disabled class="btn btn-primary mt-2">Publicar</button>
                 </div>
             </form>
         </div>
@@ -29,12 +59,21 @@
             <div class="row mt-3 mb-3">
                 <div class="col-6 offset-3">
                     <div class="card shadow-sm">
-                        <div class="d-flex flex-row m-1 height-28">
-                            <div class="m-1">
-                                <img src="@publication.User.ProfilePhotoUrl" width="25" height="25">
+                        <div class="d-flex flex-row justify-content-between m-1 height-28">
+                            <div class="d-flex flex-row">
+                                <div class="m-1">
+                                    <img src="@publication.User.ProfilePhotoUrl" width="25" height="25">
+                                </div>
+                                <div class="m-1">
+                                    <p><b>@publication.User.FirstName @publication.User.LastName</b></p>
+                                </div>
                             </div>
-                            <div class="m-1">
-                                <p><strong>@publication.User.FirstName @publication.User.LastName</strong></p>
+                            <div class="dropdown-center text-end m-2">
+                                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownPublication-@publication.Id" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                                <ul class="dropdown-menu text-small" aria-labelledby="dropdownPublication-@publication.Id" style="">
+                                    <li><a class="dropdown-item" asp-controller="Publication" asp-action="Edit" asp-route-id="@publication.Id">Editar publicación</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Publication" asp-action="Delete" asp-route-id="@publication.Id">Borrar publicación</a></li>
+                                </ul>
                             </div>
                         </div>
                         <div class="d-flex flex-row">
@@ -44,23 +83,29 @@
 
                         @if (publication.ImageUrl != null)
                         {
-                            <img src="@publication.ImageUrl" style="width:100%; height:50px;" />
+                            <img src="@publication.ImageUrl" style="width:100%;" />
                         }
-                        <hr>
-                        <div class="mb-3">
+                        <hr class="mt-2 mb-0">
+                        <div>
                             <form method="post" asp-controller="Comment" asp-action="Create">
-                                <input type="text" name="Content" />
                                 <input type="hidden" name="PublicationId" value="@publication.Id" />
-                                <button type="submit" class="btn btn-primary">Comentar</button>
+                                <div class="d-flex flex-row m-auto justify-content-between w-100 p-3">
+                                    <div class="w-75 m-1">
+                                        <textarea id="commentTextArea" name="Content" placeholder="Escribe un comentario" class="p-2 w-100 form-control commentTextArea" rows="1" cols="30"></textarea>
+                                    </div>
+                                    <div class="w-25 m-1">
+                                        <button type="submit" disabled class="btn btn-primary w-100 btnCommentHome">Comentar</button>
+                                    </div>
+                                </div>
                             </form>
                         </div>
-                        <div>
+                        <div class="mb-2">
                             @if (publication.Comments != null || publication.Comments.Count() != 0)
                             {
                                 foreach (CommentViewModel comment in publication.Comments)
                                 {
-                                    <div class="card w-75 m-auto">
-                                        <div class="d-flex flex-row m-1 height-28">
+                                    <div class="card w-75 mb-2 m-auto">
+                                        <div class="d-flex flex-row m-1 height-25">
                                             <div class="m-1">
                                                 <img src="@comment.User.ProfilePhotoUrl" width="25" height="25">
                                             </div>
@@ -82,3 +127,4 @@
         }
     }
 </div>
+<script src="~/js/home.js" asp-append-version="true"></script>

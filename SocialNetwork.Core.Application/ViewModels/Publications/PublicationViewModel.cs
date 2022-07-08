@@ -20,6 +20,6 @@ namespace SocialNetwork.Core.Application.ViewModels.Publications
 
         public UserViewModel User { get; set; }
         public FriendViewModel Friend { get; set; }
-        public ICollection<CommentViewModel> Comments { get; set; }
+        public List<CommentViewModel> Comments { get; set; }
     }
 }

@@ -40,7 +40,7 @@ namespace SocialNetwork.Core.Application.Services
 
         public override async Task<List<CommentViewModel>> GetAllViewModel()
         {
-            List<Comment> comments = await _commentRepository.GetAllWithIncludeAsync(new List<string> { "User", "Publication" });
+            List<Comment> comments = await _commentRepository.GetAllWithIncludeAsync(new List<string> { "Publication", "User" });
             List<CommentViewModel> commentViewModels = _mapper.Map<List<CommentViewModel>>(comments);
 
             return commentViewModels;

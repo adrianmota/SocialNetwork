@@ -14,7 +14,7 @@ namespace SocialNetwork.Core.Domain.Entities
         public string ProfilePhotoUrl { get; set; }
         public string Username { get; set; }
 
-        public IList<UserFriend> UserFriends { get; set; }
-        public ICollection<Publication> Publications { get; set; }
+        public List<UserFriend> UserFriends { get; set; }
+        public List<Publication> Publications { get; set; }
     }
 }

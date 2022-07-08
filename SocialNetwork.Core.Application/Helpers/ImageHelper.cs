@@ -12,7 +12,7 @@ namespace SocialNetwork.Core.Application.Helpers
     {
         public string UploadImage(IFormFile file, string basePath, string oldImage = null, bool editMode = false)
         {
-            if (editMode)
+            if (editMode && file == null)
             {
                 return oldImage;
             }
@@ -22,6 +22,11 @@ namespace SocialNetwork.Core.Application.Helpers
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
+            }
+
+            if (editMode)
+            {
+
             }
 
             Guid guid = Guid.NewGuid();
@@ -35,6 +40,7 @@ namespace SocialNetwork.Core.Application.Helpers
             {
                 file.CopyTo(stream);
             }
+
 
             return relativeFilePath;
         }

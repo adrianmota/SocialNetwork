@@ -32,6 +32,11 @@ namespace SocialNetwork.Core.Application.Services
             await _repository.DeleteAsync(id);
         }
 
+        public virtual async Task Delete(params int[] id)
+        {
+            await _repository.DeleteAsync(id);
+        }
+
         public virtual async Task<List<ViewModel>> GetAllViewModel()
         {
             List<ViewModel> viewModelList = _mapper.Map<List<ViewModel>>(await _repository.GetAllAsync());

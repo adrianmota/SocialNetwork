@@ -33,6 +33,13 @@ namespace SocialNetwork.Infrastructure.Persistence.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public virtual async Task DeleteAsync(params int[] id)
+        {
+            Entity entity = await _dbContext.Set<Entity>().FindAsync(id[0], id[1]);
+            _dbContext.Set<Entity>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public virtual async Task<List<Entity>> GetAllAsync()
         {
             return await _dbContext.Set<Entity>().ToListAsync();

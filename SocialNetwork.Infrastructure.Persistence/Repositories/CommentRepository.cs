@@ -23,7 +23,7 @@ namespace SocialNetwork.Infrastructure.Persistence.Repositories
         {
             var query = _dbContext.Set<Comment>().AsQueryable();
 
-            foreach(string property in properties)
+            foreach (string property in properties)
             {
                 query = query.Include(property);
             }

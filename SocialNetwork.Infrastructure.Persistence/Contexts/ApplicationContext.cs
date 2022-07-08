@@ -153,12 +153,6 @@ namespace SocialNetwork.Infrastructure.Persistence.Contexts
                    .IsRequired();
             #endregion
 
-            #region Publications
-            builder.Entity<Publication>()
-                   .Property("Content")
-                   .IsRequired();
-            #endregion
-
             #region Comments
             builder.Entity<Comment>()
                    .Property("Content")

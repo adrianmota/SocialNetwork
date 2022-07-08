@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Core.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Core.Application.Interfaces.Repositories;
 using SocialNetwork.Core.Domain.Entities;
 using SocialNetwork.Infrastructure.Persistence.Contexts;
 using System;
@@ -16,6 +17,18 @@ namespace SocialNetwork.Infrastructure.Persistence.Repositories
         public UserFriendRepository(ApplicationContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+        }
+
+        public async Task<List<UserFriend>> GetAllWithIncludeAsync(List<string> properties)
+        {
+            var query = _dbContext.Set<UserFriend>().AsQueryable();
+
+            foreach (string property in properties)
+            {
+                query = query.Include(property);
+            }
+
+            return await query.ToListAsync();
         }
     }
 }

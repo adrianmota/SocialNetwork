@@ -16,6 +16,6 @@ namespace SocialNetwork.Core.Domain.Entities
 
         public User User { get; set; }
         public Friend Friend { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

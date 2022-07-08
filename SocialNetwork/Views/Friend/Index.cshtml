@@ -1,0 +1,148 @@
+﻿@using SocialNetwork.Core.Application.ViewModels.Comments
+@using SocialNetwork.Core.Application.ViewModels.Friends
+@using SocialNetwork.Core.Application.ViewModels.Publications
+@model List<FriendViewModel>
+@{
+    ViewData["Title"] = "Mis amigos";
+}
+
+<!-- Modal to add a friend -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar amigo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" asp-controller="Friend" asp-action="AddFriend">
+                <div class="modal-body">
+                    <input type="text" class="form-control" name="Username" placeholder="Escribe el nombre de usuario" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+        <div class="col-12">
+            <div class="d-flex flex-nowrap">
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-25">
+                    <div class="mb-3">
+                        <h4>Amigos</h4>
+                    </div>
+                    <div class="p-2">
+                        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar amigo</button>
+                    </div>
+                    <hr />
+                    <div>
+                        @if (Model == null || Model.Count() == 0)
+                        {
+                            <h4 class="text-center">No tienes amigos agregados</h4>
+                        }
+                        else
+                        {
+                            foreach (FriendViewModel friend in Model)
+                            {
+                                <div class="d-flex flex-row bg-light">
+                                    <div class="m-1">
+                                        <img src="@friend.ProfilePhotoUrl" width="25" height="25" />
+                                    </div>
+                                    <div class="m-1">
+                                        <strong>@friend.FirstName @friend.LastName</strong>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <small class="text-black-50">&commat;@friend.Username</small>
+                                    <a class="btn btn-outline-danger btn-sm" asp-controller="UserFriend" asp-action="Delete" asp-route-id="@friend.Id">Eliminar</a>
+                                </div>
+                                <hr />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-75">
+                    <div class="mb-3">
+                        <h4>Publicaciones</h4>
+                    </div>
+                    <div>
+                        @if (ViewBag.Publications == null || ViewBag.Publications.Count == 0)
+                        {
+                            <h4 class="text-center">No hay publicaciones</h4>
+                        }
+                        else
+                        {
+                            foreach (PublicationViewModel publication in ViewBag.Publications)
+                            {
+                                <div class="mb-3">
+                                    <div class="card shadow-sm">
+                                        <div class="d-flex flex-row m-1 height-28">
+                                            <div class="m-1">
+                                                <img src="@publication.Friend.ProfilePhotoUrl" width="25" height="25">
+                                            </div>
+                                            <div class="m-1">
+                                                <p><strong>@publication.Friend.FirstName @publication.Friend.LastName</strong></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            <small class="left-40" style="font-size: 12px;">@publication.Created.ToString()</small>
+                                        </div>
+                                        <p class="m-2">@publication.Content</p>
+
+                                        @if (publication.ImageUrl != null)
+                                        {
+                                            <img src="@publication.ImageUrl" style="width:100%;" />
+                                        }
+                                        <hr class="mt-2 mb-0">
+                                        <div>
+                                            <form method="post" asp-controller="Comment" asp-action="Create">
+                                                <input type="hidden" name="PublicationId" value="@publication.Id" />
+                                                <div class="d-flex flex-row m-auto justify-content-between w-100 p-2">
+                                                    <div class="w-75 m-1">
+                                                        <textarea id="commentTextArea" name="Content" placeholder="Escribe un comentario" class="p-2 w-100 form-control commentTextArea" rows="1" cols="30"></textarea>
+                                                    </div>
+                                                    <div class="w-25 m-1">
+                                                        <button type="submit" disabled class="btn btn-primary w-100 btnCommentFriend">Comentar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="mb-2">
+                                            @if (publication.Comments != null || publication.Comments.Count() != 0)
+                                            {
+                                                foreach (CommentViewModel comment in publication.Comments)
+                                                {
+                                                    <div class="card w-75 mb-2 m-auto">
+                                                        <div class="d-flex flex-row m-1 height-25">
+                                                            <div class="m-1">
+                                                                <img src="@comment.User.ProfilePhotoUrl" width="25" height="25" />
+                                                            </div>
+                                                            <div class="m-1">
+                                                                <p><strong>@comment.User.FirstName @comment.User.LastName</strong></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-row">
+                                                            <small class="left-40" style="font-size: 12px;">@comment.Created.ToString()</small>
+                                                        </div>
+                                                        <p class="m-2">@comment.Content</p>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/friend.js" asp-append-version="true"></script>

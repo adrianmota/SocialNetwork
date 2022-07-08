@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Http
+@using SocialNetwork.Core.Application.Helpers
+@using SocialNetwork.Core.Application.ViewModels.Publications
+@using SocialNetwork.Core.Application.ViewModels.Users
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    UserViewModel user = httpContextAccessor.HttpContext.Session.Get<UserViewModel>("user");
+}
+@model SavePublicationViewModel
+@{
+    ViewData["Title"] = "Editando publicación";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h4 class="text-center">Editando publicación</h4>
+        </div>
+    </div>
+    <div class="row mt-3 mb-3">
+        <div class="col-6 offset-3">
+            <div class="card shadow-sm p-2">
+                <div class="d-flex flex-row m-1 height-28 mb-3">
+                    <div class="m-1">
+                        <img src="@user.ProfilePhotoUrl" width="25" height="25">
+                    </div>
+                    <div class="m-1">
+                        <p><b>@user.FirstName @user.LastName</b></p>
+                    </div>
+                </div>
+                <form method="post" asp-controller="Publication" asp-action="Edit">
+                    <div class="d-flex flex-column">
+                        @if (Model.ImageUrl == null)
+                        {
+                            <textarea id="publicationContext" asp-for="Content" placeholder="¿Qué piensas?" class="p-2 mt-2 mb-2 form-control" rows="3" cols="50">@Model.Content</textarea>
+                        }
+                        else
+                        {
+                            <input class="form-control" asp-for="File" required />
+                        }
+
+                        <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

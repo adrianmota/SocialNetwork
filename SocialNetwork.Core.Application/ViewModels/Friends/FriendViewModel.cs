@@ -16,7 +16,7 @@ namespace SocialNetwork.Core.Application.ViewModels.Friends
         public string ProfilePhotoUrl { get; set; }
         public string Username { get; set; }
 
-        public IList<UserFriendViewModel> UserFriends { get; set; }
-        public ICollection<PublicationViewModel> Publications { get; set; }
+        public List<UserFriendViewModel> UserFriends { get; set; }
+        public List<PublicationViewModel> Publications { get; set; }
     }
 }

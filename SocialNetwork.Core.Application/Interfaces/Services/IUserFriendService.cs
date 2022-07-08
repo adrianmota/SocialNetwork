@@ -1,4 +1,5 @@
-﻿using SocialNetwork.Core.Application.ViewModels.UserFriends;
+﻿using SocialNetwork.Core.Application.ViewModels.Friends;
+using SocialNetwork.Core.Application.ViewModels.UserFriends;
 using SocialNetwork.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,7 @@ namespace SocialNetwork.Core.Application.Interfaces.Services
 {
     public interface IUserFriendService : IGenericService<SaveUserFriendViewModel, UserFriendViewModel, UserFriend>
     {
+        Task<FriendViewModel> AddFriend(AddFriendViewModel addViewModel);
+        Task<List<FriendViewModel>> GetAllFriendViewModel();
     }
 }

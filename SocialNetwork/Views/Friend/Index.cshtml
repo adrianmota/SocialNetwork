@@ -51,7 +51,7 @@
                             {
                                 <div class="d-flex flex-row bg-light">
                                     <div class="m-1">
-                                        <img src="@friend.ProfilePhotoUrl" width="25" height="25" />
+                                        <img src="@friend.ProfilePhotoUrl" width="30" height="30" />
                                     </div>
                                     <div class="m-1">
                                         <strong>@friend.FirstName @friend.LastName</strong>
@@ -83,14 +83,14 @@
                                     <div class="card shadow-sm">
                                         <div class="d-flex flex-row m-1 height-28">
                                             <div class="m-1">
-                                                <img src="@publication.Friend.ProfilePhotoUrl" width="25" height="25">
+                                                <img src="@publication.Friend.ProfilePhotoUrl" width="30" height="30">
                                             </div>
                                             <div class="m-1">
                                                 <p><strong>@publication.Friend.FirstName @publication.Friend.LastName</strong></p>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row">
-                                            <small class="left-40" style="font-size: 12px;">@publication.Created.ToString()</small>
+                                            <small class="left-50" style="font-size: 12px;">@publication.Created.ToString()</small>
                                         </div>
                                         <p class="m-2">@publication.Content</p>
 
@@ -99,45 +99,42 @@
                                             <img src="@publication.ImageUrl" style="width:100%;" />
                                         }
                                         <hr class="mt-2 mb-0">
-                                        <div>
-                                            <form method="post" asp-controller="Comment" asp-action="Create">
-                                                <input type="hidden" name="PublicationId" value="@publication.Id" />
-                                                <div class="d-flex flex-row m-auto justify-content-between w-100 p-2">
-                                                    <div class="w-75 m-1">
-                                                        <textarea id="commentTextArea" name="Content" placeholder="Escribe un comentario" class="p-2 w-100 form-control commentTextArea" rows="1" cols="30"></textarea>
-                                                    </div>
-                                                    <div class="w-25 m-1">
-                                                        <button type="submit" disabled class="btn btn-primary w-100 btnCommentFriend">Comentar</button>
-                                                    </div>
+
+                                        <form method="post" asp-controller="Comment" asp-action="Create">
+                                            <input type="hidden" name="PublicationId" value="@publication.Id" />
+                                            <div class="d-flex flex-row m-auto justify-content-between w-100 p-2">
+                                                <div class="w-75 m-1">
+                                                    <textarea id="commentTextArea" name="Content" placeholder="Escribe un comentario" class="p-2 w-100 form-control commentTextArea" rows="1" cols="30"></textarea>
+                                                    <input type="hidden" name="Source" value="fromFriend" />
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="mb-2">
-                                            @if (publication.Comments != null || publication.Comments.Count() != 0)
+                                                <div class="w-25 m-1">
+                                                    <button type="submit" disabled class="btn btn-primary w-100 btnCommentFriend">Comentar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        @if (publication.Comments != null || publication.Comments.Count() != 0)
+                                        {
+                                            foreach (CommentViewModel comment in publication.Comments)
                                             {
-                                                foreach (CommentViewModel comment in publication.Comments)
-                                                {
-                                                    <div class="card w-75 mb-2 m-auto">
-                                                        <div class="d-flex flex-row m-1 height-25">
-                                                            <div class="m-1">
-                                                                <img src="@comment.User.ProfilePhotoUrl" width="25" height="25" />
-                                                            </div>
-                                                            <div class="m-1">
-                                                                <p><strong>@comment.User.FirstName @comment.User.LastName</strong></p>
-                                                            </div>
+                                                <div class="card m-4 mt-0">
+                                                    <div class="d-flex flex-row m-1 height-25">
+                                                        <div class="m-1">
+                                                            <img src="@comment.User.ProfilePhotoUrl" width="30" height="30" />
                                                         </div>
-                                                        <div class="d-flex flex-row">
-                                                            <small class="left-40" style="font-size: 12px;">@comment.Created.ToString()</small>
+                                                        <div class="m-1">
+                                                            <p><strong>@comment.User.FirstName @comment.User.LastName</strong></p>
                                                         </div>
-                                                        <p class="m-2">@comment.Content</p>
                                                     </div>
-                                                }
+                                                    <div class="d-flex flex-row">
+                                                        <small class="left-50" style="font-size: 12px;">@comment.Created.ToString()</small>
+                                                    </div>
+                                                    <p class="m-2">@comment.Content</p>
+                                                </div>
                                             }
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                             }
-
                         }
                     </div>
                 </div>

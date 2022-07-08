@@ -12,7 +12,6 @@ namespace SocialNetwork.Core.Application.ViewModels.Publications
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Debe colocar el contenido")]
         [DataType(DataType.Text)]
         public string Content { get; set; }
         public string ImageUrl { get; set; }

@@ -9,10 +9,8 @@ namespace SocialNetwork.Core.Application.ViewModels.Comments
 {
     public class SaveCommentViewModel
     {
-        [Required(ErrorMessage = "Debes colocar el contenido")]
-        [DataType(DataType.Text)]
         public string Content { get; set; }
-
+        public string Source { get; set; }
         public int PublicationId { get; set; }
         public int UserId { get; set; }
     }

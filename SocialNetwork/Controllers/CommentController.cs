@@ -27,6 +27,12 @@ namespace WebApp.SocialNetwork.Controllers
             }
 
             await _commentService.Add(saveViewModel);
+
+            if (saveViewModel.Source == "fromFriend")
+            {
+                return RedirectToRoute(new { controller = "Friend", action = "Index" });
+            }
+
             return RedirectToRoute(new { controller = "Home", action = "Index" });
         }
     }

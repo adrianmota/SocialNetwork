@@ -24,11 +24,6 @@ namespace SocialNetwork.Core.Application.Helpers
                 Directory.CreateDirectory(path);
             }
 
-            if (editMode)
-            {
-
-            }
-
             Guid guid = Guid.NewGuid();
             FileInfo fileInfo = new(file.FileName);
             string filename = guid + fileInfo.Extension;
@@ -41,6 +36,18 @@ namespace SocialNetwork.Core.Application.Helpers
                 file.CopyTo(stream);
             }
 
+            if (editMode)
+            {
+                string[] textSplitted = oldImage.Split("\\");
+                oldImage = textSplitted[^1];
+
+                string oldImagePath = Path.Combine(path, oldImage);
+
+                if (File.Exists(oldImagePath))
+                {
+                    File.Delete(oldImagePath);
+                }
+            }
 
             return relativeFilePath;
         }

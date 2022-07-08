@@ -2,6 +2,7 @@
 using SocialNetwork.Core.Application.Helpers;
 using SocialNetwork.Core.Application.Interfaces.Services;
 using SocialNetwork.Core.Application.ViewModels.Publications;
+using System.IO;
 using System.Threading.Tasks;
 using WebApp.SocialNetwork.Middlewares;
 
@@ -79,11 +80,10 @@ namespace WebApp.SocialNetwork.Controllers
             if (saveViewModel.File != null)
             {
                 int id = saveViewModel.Id;
-
                 SavePublicationViewModel oldSaveViewModel = await _publicationService.GetByIdSaveViewModel(id);
-                string oldImage = oldSaveViewModel.ImageUrl;
+                string oldImageUrl = oldSaveViewModel.ImageUrl;
                 string baseImagePath = $"\\Images\\Publications\\{id}\\";
-                string imageUrl = _imageHelper.UploadImage(saveViewModel.File, baseImagePath, oldImage, true);
+                string imageUrl = _imageHelper.UploadImage(saveViewModel.File, baseImagePath, oldImageUrl, true);
                 saveViewModel.ImageUrl = imageUrl;
                 await _publicationService.Update(saveViewModel, id);
             }
@@ -99,6 +99,30 @@ namespace WebApp.SocialNetwork.Controllers
                 return RedirectToRoute(new { controller = "User", action = "Index" });
             }
 
+            SavePublicationViewModel saveViewModel = await _publicationService.GetByIdSaveViewModel(id);
+            
+            if (saveViewModel.ImageUrl != null)
+            {
+                string directoryOfImages = Path.Combine(Directory.GetCurrentDirectory(), $"wwwroot\\Images\\Publications\\{saveViewModel.Id}\\");
+
+                if (Directory.Exists(directoryOfImages))
+                {
+                    DirectoryInfo directoryInfo = new(directoryOfImages);
+
+                    foreach(DirectoryInfo directory in directoryInfo.GetDirectories())
+                    {
+                        directory.Delete();
+                    }
+
+                    foreach(FileInfo file in directoryInfo.GetFiles())
+                    {
+                        file.Delete();
+                    }
+
+                    Directory.Delete(directoryOfImages);
+                }
+            }
+            
             await _publicationService.Delete(id);
             return RedirectToRoute(new { controller = "Home", action = "Index" });
         }

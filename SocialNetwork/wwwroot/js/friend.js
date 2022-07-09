@@ -1,7 +1,6 @@
 ﻿document.addEventListener("DOMContentLoaded", () => {
     const commentTextAreas = document.getElementsByClassName("commentTextArea");
     const commentBtnGroup = document.getElementsByClassName("btnCommentFriend");
-    console.log(commentBtnGroup);
 
     for (let i = 0; i < commentTextAreas.length; i++) {
         const textArea = commentTextAreas[i];

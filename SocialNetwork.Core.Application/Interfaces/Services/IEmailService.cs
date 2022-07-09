@@ -1,9 +1,5 @@
-﻿using SocialNetwork.Core.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using SocialNetwork.Core.Application.Dtos;
 
 namespace SocialNetwork.Core.Application.Interfaces.Services
 {

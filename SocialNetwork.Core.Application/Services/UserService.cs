@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using SocialNetwork.Core.Application.Helpers;
 using SocialNetwork.Core.Application.Interfaces.Repositories;
 using SocialNetwork.Core.Application.Interfaces.Services;
 using SocialNetwork.Core.Application.ViewModels.Users;
 using SocialNetwork.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Core.Application.Services
 {
@@ -64,7 +64,6 @@ namespace SocialNetwork.Core.Application.Services
         public async Task<UserViewModel> ResetPassword(ResetUserPasswordViewModel resetPasswordViewModel)
         {
             List<User> users = await _userRepository.GetAllAsync();
-
             User user = users.Where(user => user.Username == resetPasswordViewModel.Username).FirstOrDefault();
 
             if (user == null)
@@ -72,21 +71,22 @@ namespace SocialNetwork.Core.Application.Services
                 return null;
             }
 
-            StringBuilder newPassword = new();
+            StringBuilder passwordStringBuilder = new();
             int length = 16;
             Random random = new Random();
 
-            while (newPassword.Length < length)
+            while (passwordStringBuilder.Length < length)
             {
                 char c = (char)random.Next(32, 126);
-                newPassword.Append(c);
+                passwordStringBuilder.Append(c);
             }
 
-            user.Password = PasswordEncryption.ComputeSha256Hash(newPassword.ToString());
+            string password = passwordStringBuilder.ToString();
+            user.Password = PasswordEncryption.ComputeSha256Hash(password);
             await _userRepository.UpdateAsync(user, user.Id);
 
             UserViewModel viewModel = _mapper.Map<UserViewModel>(user);
-            viewModel.Password = newPassword.ToString();
+            viewModel.Password = password;
             return viewModel;
         }
 

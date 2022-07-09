@@ -1,13 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using SocialNetwork.Core.Application.Interfaces.Services;
-using SocialNetwork.Core.Domain.Settings;
-using SocialNetwork.Infrastructure.Shared.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SocialNetwork.Core.Domain.Settings;
+using SocialNetwork.Core.Application.Interfaces.Services;
+using SocialNetwork.Infrastructure.Shared.Services;
 
 namespace SocialNetwork.Infrastructure.Shared
 {

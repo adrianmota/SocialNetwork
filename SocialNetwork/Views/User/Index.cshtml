@@ -6,26 +6,40 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 offset-3">
-            <div class="card shadow-sm top-60">
-                <div class="card-header bg-black text-white">
-                    <h4 class="text-center">Login</h4>
-                </div>
+        <div class="col-6">
+            <div class="h-100 d-table">
+                <h1 class="d-table-cell vertical-align-center m-auto">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    Bienvenido a <br /> Social Network
+                </h1>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card shadow top-50">
                 <div class="card-body">
                     <form method="post" asp-controller="User" asp-action="Index">
                         @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-                        <div class="mb-3">
-                            <label asp-for="Username" class="form-label">Nombre de usuario</label>
-                            <input asp-for="Username" class="form-control"/>
+                        <div class="m-2 mb-3">
+                            <input asp-for="Username" class="form-control p-2 fs-5" placeholder="Nombre de usuario" />
                         </div>
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label">Contraseña</label>
-                            <input asp-for="Password" class="form-control"/>
+                        <div class="m-2 mb-3">
+                            <input asp-for="Password" class="form-control p-2 fs-5" placeholder="Contraseña" />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                        <a class="btn btn-secondary" asp-controller="User" asp-action="Register">Registrarse</a>
-                        <a class="btn btn-secondary" asp-controller="User" asp-action="ResetPassword">Reestablecer contraseña</a>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="m-2 mb-1 w-50">
+                                <button type="submit" class="btn btn-primary w-100 fs-5">Iniciar sesión</button>
+                            </div>
+                            <div class="m-2 mb-1 w-50">
+                                <a class="btn btn-secondary w-100 fs-5" asp-controller="User" asp-action="Register">Registrarse</a>
+                            </div>
+                        </div>
+                        <div class="m-2">
+                            <a class="btn btn-dark w-100 fs-5" asp-controller="User" asp-action="ResetPassword">Reestablecer contraseña</a>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -1,10 +1,7 @@
-﻿using SocialNetwork.Core.Application.ViewModels.Publications;
-using SocialNetwork.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using SocialNetwork.Core.Domain.Entities;
+using SocialNetwork.Core.Application.ViewModels.Publications;
 
 namespace SocialNetwork.Core.Application.Interfaces.Services
 {

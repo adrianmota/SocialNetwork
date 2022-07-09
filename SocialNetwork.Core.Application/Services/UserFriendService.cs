@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using SocialNetwork.Core.Application.Helpers;
 using SocialNetwork.Core.Application.Interfaces.Repositories;
@@ -7,11 +12,6 @@ using SocialNetwork.Core.Application.ViewModels.Friends;
 using SocialNetwork.Core.Application.ViewModels.UserFriends;
 using SocialNetwork.Core.Application.ViewModels.Users;
 using SocialNetwork.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Core.Application.Services
 {
@@ -76,7 +76,8 @@ namespace SocialNetwork.Core.Application.Services
 
             List<UserFriend> userFriends = await _userFriendRepository.GetAllAsync();
             List<UserFriend> relationships = userFriends
-                .Where(uf => uf.FriendId == friendId && uf.UserId == userId || uf.FriendId == userId && uf.UserId == friendId).ToList();
+                .Where(uf => uf.FriendId == friendId && uf.UserId == userId || uf.FriendId == userId && uf.UserId == friendId)
+                .ToList();
 
             foreach(UserFriend relationship in relationships)
             {

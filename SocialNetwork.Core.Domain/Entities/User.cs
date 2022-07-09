@@ -1,5 +1,5 @@
-﻿using SocialNetwork.Core.Domain.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using SocialNetwork.Core.Domain.Common;
 
 namespace SocialNetwork.Core.Domain.Entities
 {

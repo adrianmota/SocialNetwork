@@ -71,6 +71,11 @@ namespace WebApp.SocialNetwork.Controllers
 
         public IActionResult ResetPassword()
         {
+            if (_validateUserSession.HasUser())
+            {
+                return RedirectToRoute(new { controller = "Home", action = "Index" });
+            }
+
             return View(new ResetUserPasswordViewModel());
         }
 
@@ -158,7 +163,7 @@ namespace WebApp.SocialNetwork.Controllers
             {
                 To = saveViewModel.Email,
                 Subject = "Activar usuario",
-                Body = "<h1>Gracias por registrarte</h1>" +
+                Body = "<h1>Gracias por registrarte a Social Network :)</h1>" +
                        "<p>Presiona el hipervínculo debajo para activar el usuario:</p>" +
                        $"<p><a href='https://localhost:44388/User/Activate/{id}'>Activar usuario</a></p>"
             });

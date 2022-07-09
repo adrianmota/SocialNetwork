@@ -1,12 +1,10 @@
-﻿using SocialNetwork.Core.Application.ViewModels.Comments;
-using SocialNetwork.Core.Application.ViewModels.Friends;
-using SocialNetwork.Core.Application.ViewModels.Publications;
-using SocialNetwork.Core.Application.ViewModels.UserFriends;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialNetwork.Core.Application.ViewModels.Publications;
+using SocialNetwork.Core.Application.ViewModels.UserFriends;
 
 namespace SocialNetwork.Core.Application.ViewModels.Users
 {

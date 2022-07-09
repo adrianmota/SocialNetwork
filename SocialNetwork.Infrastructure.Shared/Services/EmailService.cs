@@ -1,15 +1,15 @@
-﻿using MailKit.Net.Smtp;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using SocialNetwork.Core.Application.Dtos;
 using SocialNetwork.Core.Application.Interfaces.Services;
 using SocialNetwork.Core.Domain.Settings;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.Infrastructure.Shared.Services
 {
@@ -26,22 +26,22 @@ namespace SocialNetwork.Infrastructure.Shared.Services
         {
             try
             {
-                MimeMessage email = new();
+                MimeMessage emailMessage = new();
 
-                email.Sender = MailboxAddress.Parse($"{_mailSettings.DisplayName} <{_mailSettings.EmailFrom}>");
-                email.To.Add(MailboxAddress.Parse(request.To));
-                email.Subject = request.Subject;
+                emailMessage.Sender = MailboxAddress.Parse($"{_mailSettings.DisplayName} <{_mailSettings.EmailFrom}>");
+                emailMessage.To.Add(MailboxAddress.Parse(request.To));
+                emailMessage.Subject = request.Subject;
 
                 BodyBuilder builder = new();
                 builder.HtmlBody = request.Body;
-                email.Body = builder.ToMessageBody();
+                emailMessage.Body = builder.ToMessageBody();
 
                 using SmtpClient smtp = new();
                 smtp.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 smtp.Connect(_mailSettings.SmtpHost, _mailSettings.SmtpPort, SecureSocketOptions.StartTls);
                 smtp.Authenticate(_mailSettings.SmtpUser, _mailSettings.SmtpPass);
 
-                await smtp.SendAsync(email);
+                await smtp.SendAsync(emailMessage);
 
                 smtp.Disconnect(true);
             }

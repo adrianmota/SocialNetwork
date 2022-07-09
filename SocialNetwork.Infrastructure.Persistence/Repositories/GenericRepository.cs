@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SocialNetwork.Core.Application.Interfaces.Repositories;
-using SocialNetwork.Infrastructure.Persistence.Contexts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Core.Application.Interfaces.Repositories;
+using SocialNetwork.Infrastructure.Persistence.Contexts;
 
 namespace SocialNetwork.Infrastructure.Persistence.Repositories
 {
@@ -21,6 +21,7 @@ namespace SocialNetwork.Infrastructure.Persistence.Repositories
 
         public virtual async Task<Entity> AddAsync(Entity entity)
         {
+            _dbContext.Entry(entity).State = EntityState.Added;
             await _dbContext.Set<Entity>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return entity;

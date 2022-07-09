@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using SocialNetwork.Core.Application.Interfaces.Repositories;
-using SocialNetwork.Core.Application.Interfaces.Services;
-using SocialNetwork.Core.Application.ViewModels.Friends;
-using SocialNetwork.Core.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using SocialNetwork.Core.Application.Interfaces.Repositories;
+using SocialNetwork.Core.Application.Interfaces.Services;
+using SocialNetwork.Core.Application.ViewModels.Friends;
+using SocialNetwork.Core.Domain.Entities;
 
 namespace SocialNetwork.Core.Application.Services
 {

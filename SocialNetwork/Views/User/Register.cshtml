@@ -1,7 +1,7 @@
 ﻿@using SocialNetwork.Core.Application.ViewModels.Users
 @model SaveUserViewModel
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Registrarse";
 }
 
 <div class="container-fluid">
@@ -48,8 +48,15 @@
                             <input asp-for="ConfirmPassword" class="form-control" />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                        <a class="btn btn-secondary" asp-controller="User" asp-action="Index">Volver atrás</a>
+                        <div class="d-flex flex-row justify-content-center">
+                            <div class="mb-1 mt-1 w-50">
+                                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+                            </div>
+                            <div class="m-1"></div>
+                            <div class="mb-1 mt-1 w-50">
+                                <a class="btn btn-secondary w-100" asp-controller="User" asp-action="Index">Volver atrás</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

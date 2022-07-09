@@ -101,7 +101,19 @@ body {
     height: 25px;
 }
 
-.left-50 {
+.left-56 {
     position: relative;
-    left: 45px;
+    left: 56px;
+}
+
+.vertical-align-center {
+    vertical-align: middle;
+}
+
+.border-radius-15 {
+    border-radius: 15px;
+}
+
+.border-radius-45 {
+    border-radius: 45px;
 }

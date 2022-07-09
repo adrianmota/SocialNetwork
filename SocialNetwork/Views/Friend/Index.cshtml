@@ -32,12 +32,12 @@
         @Html.ValidationSummary(false, "", new {@class = "text-danger"})
         <div class="col-12">
             <div class="d-flex flex-nowrap">
-                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-25">
-                    <div class="mb-3">
-                        <h4>Amigos</h4>
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-25 border-radius-15">
+                    <div class="mb-2">
+                        <h4 class="text-center">Amigos</h4>
                     </div>
                     <div class="p-2">
-                        <button type="button" class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar amigo</button>
+                        <button type="button" class="btn btn-outline-success w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">Agregar amigo</button>
                     </div>
                     <hr />
                     <div>
@@ -51,7 +51,7 @@
                             {
                                 <div class="d-flex flex-row bg-light">
                                     <div class="m-1">
-                                        <img src="@friend.ProfilePhotoUrl" width="30" height="30" />
+                                        <img src="@friend.ProfilePhotoUrl" width="40" height="40" class="border-radius-45" />
                                     </div>
                                     <div class="m-1">
                                         <strong>@friend.FirstName @friend.LastName</strong>
@@ -66,9 +66,10 @@
                         }
                     </div>
                 </div>
-                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-75">
+                <div class="m-2"></div>
+                <div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-light w-75 border-radius-15">
                     <div class="mb-3">
-                        <h4>Publicaciones</h4>
+                        <h4 class="text-center">Publicaciones</h4>
                     </div>
                     <div>
                         @if (ViewBag.Publications == null || ViewBag.Publications.Count == 0)
@@ -83,14 +84,14 @@
                                     <div class="card shadow-sm">
                                         <div class="d-flex flex-row m-1 height-28">
                                             <div class="m-1">
-                                                <img src="@publication.Friend.ProfilePhotoUrl" width="30" height="30">
+                                                <img src="@publication.Friend.ProfilePhotoUrl" width="40" height="40" class="border-radius-45">
                                             </div>
                                             <div class="m-1">
                                                 <p><strong>@publication.Friend.FirstName @publication.Friend.LastName</strong></p>
                                             </div>
                                         </div>
                                         <div class="d-flex flex-row">
-                                            <small class="left-50" style="font-size: 12px;">@publication.Created.ToString()</small>
+                                            <small class="left-56" style="font-size: 12px;">@publication.Created.ToString()</small>
                                         </div>
                                         <p class="m-2">@publication.Content</p>
 
@@ -103,11 +104,11 @@
                                         <form method="post" asp-controller="Comment" asp-action="Create">
                                             <input type="hidden" name="PublicationId" value="@publication.Id" />
                                             <div class="d-flex flex-row m-auto justify-content-between w-100 p-2">
-                                                <div class="w-75 m-1">
+                                                <div class="w-75 m-2">
                                                     <textarea id="commentTextArea" name="Content" placeholder="Escribe un comentario" class="p-2 w-100 form-control commentTextArea" rows="1" cols="30"></textarea>
                                                     <input type="hidden" name="Source" value="fromFriend" />
                                                 </div>
-                                                <div class="w-25 m-1">
+                                                <div class="w-25 m-2">
                                                     <button type="submit" disabled class="btn btn-primary w-100 btnCommentFriend">Comentar</button>
                                                 </div>
                                             </div>
@@ -116,17 +117,17 @@
                                         {
                                             foreach (CommentViewModel comment in publication.Comments)
                                             {
-                                                <div class="card m-4 mt-0">
+                                                <div class="card m-3 mt-0">
                                                     <div class="d-flex flex-row m-1 height-25">
                                                         <div class="m-1">
-                                                            <img src="@comment.User.ProfilePhotoUrl" width="30" height="30" />
+                                                            <img src="@comment.User.ProfilePhotoUrl" width="40" height="40" class="border-radius-45" />
                                                         </div>
                                                         <div class="m-1">
                                                             <p><strong>@comment.User.FirstName @comment.User.LastName</strong></p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-row">
-                                                        <small class="left-50" style="font-size: 12px;">@comment.Created.ToString()</small>
+                                                        <small class="left-56" style="font-size: 12px;">@comment.Created.ToString()</small>
                                                     </div>
                                                     <p class="m-2">@comment.Content</p>
                                                 </div>

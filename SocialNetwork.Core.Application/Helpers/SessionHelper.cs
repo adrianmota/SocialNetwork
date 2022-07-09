@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Text;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Text;
 
 namespace SocialNetwork.Core.Application.Helpers
 {

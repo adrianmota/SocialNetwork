@@ -1,12 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SocialNetwork.Core.Domain.Common;
-using SocialNetwork.Core.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SocialNetwork.Core.Domain.Common;
+using SocialNetwork.Core.Domain.Entities;
 
 namespace SocialNetwork.Infrastructure.Persistence.Contexts
 {

@@ -3,7 +3,6 @@ using SocialNetwork.Core.Application.Interfaces.Services;
 using SocialNetwork.Core.Application.ViewModels.Users;
 using System.Threading.Tasks;
 using SocialNetwork.Core.Application.Helpers;
-using SocialNetwork.Infrastructure.Shared.Services;
 using SocialNetwork.Core.Application.Dtos;
 using Microsoft.AspNetCore.Http;
 using WebApp.SocialNetwork.Middlewares;

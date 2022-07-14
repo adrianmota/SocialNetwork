@@ -9,7 +9,7 @@ namespace SocialNetwork.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IPublicationService _publicationService; 
+        private readonly IPublicationService _publicationService;
         private readonly ValidateUserSession _validateUserSession;
 
         public HomeController(IPublicationService publicationService, ValidateUserSession validateUserSession)

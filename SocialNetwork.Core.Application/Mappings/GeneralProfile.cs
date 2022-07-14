@@ -92,6 +92,5 @@ namespace SocialNetwork.Core.Application.Mappings
                 .ForMember(dest => dest.LastModified, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
         }
-
     }
 }
